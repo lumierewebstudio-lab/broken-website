@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ƁƦƠҠЄƝ — Admin Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <main>
+
+        <!-- =========================
+             ADMIN HERO
+        ========================== -->
+
+        <section class="page-hero">
+
+            <div class="container">
+
+                <p class="eyebrow">
+                    PRIVATE
+                </p>
+
+                <h1>
+                    ADMIN
+                    <span>DASHBOARD.</span>
+                </h1>
+
+                <p class="page-hero-text">
+                    Manage projects and incoming
+                    enquiries from one private space.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PROJECT MANAGEMENT
+        ========================== -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div
+                    style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:flex-end;
+                        gap:24px;
+                        flex-wrap:wrap;
+                        margin-bottom:48px;
+                    "
+                >
+
+                    <div>
+
+                        <p class="eyebrow">
+                            PORTFOLIO
+                        </p>
+
+                        <h2>
+                            MANAGE
+                            <span>PROJECTS.</span>
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:12px;
+                            flex-wrap:wrap;
+                        "
+                    >
+
+                        <button
+                            id="refresh-projects-button"
+                            class="btn btn-secondary"
+                            type="button"
+                        >
+                            Refresh
+                        </button>
+
+                        <button
+                            id="logout-button"
+                            class="btn btn-secondary"
+                            type="button"
+                        >
+                            Logout
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADD PROJECT -->
+
+                <div
+                    class="work-card"
+                    style="
+                        padding:32px;
+                        margin-bottom:48px;
+                    "
+                >
+
+                    <p class="eyebrow">
+                        NEW PROJECT
+                    </p>
+
+                    <h3>
+                        ADD A
+                        <span>PROJECT.</span>
+                    </h3>
+
+                    <p
+                        style="
+                            margin-bottom:32px;
+                        "
+                    >
+                        Add a project to your private
+                        portfolio collection.
+                    </p>
+
+
+                    <form
+                        id="project-form"
+                        style="
+                            display:grid;
+                            gap:20px;
+                        "
+                    >
+
+                        <div>
+
+                            <label
+                                for="project-title"
+                            >
+                                PROJECT TITLE
+                            </label>
+
+                            <input
+                                type="text"
+                                id="project-title"
+                                name="title"
+                                placeholder="PIVO"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label
+                                for="project-category"
+                            >
+                                CATEGORY
+                            </label>
+
+                            <input
+                                type="text"
+                                id="project-category"
+                                name="category"
+                                placeholder="Digital Product"
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label
+                                for="project-description"
+                            >
+                                DESCRIPTION
+                            </label>
+
+                            <textarea
+                                id="project-description"
+                                name="description"
+                                rows="5"
+                                placeholder="Describe the project..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div>
+
+                            <label
+                                for="project-link"
+                            >
+                                PROJECT LINK
+                            </label>
+
+                            <input
+                                type="url"
+                                id="project-link"
+                                name="link"
+                                placeholder="https://example.com"
+                            >
+
+                        </div>
+
+
+                        <div
+                            style="
+                                display:flex;
+                                align-items:center;
+                                gap:20px;
+                                flex-wrap:wrap;
+                            "
+                        >
+
+                            <button
+                                id="add-project-button"
+                                class="btn btn-primary"
+                                type="submit"
+                            >
+                                Add Project
+                            </button>
+
+                            <p
+                                id="project-form-message"
+                                class="form-status"
+                                role="status"
+                            ></p>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- PROJECT LIST -->
+
+                <div>
+
+                    <p class="eyebrow">
+                        CURRENT PROJECTS
+                    </p>
+
+                    <h3
+                        style="
+                            margin-bottom:32px;
+                        "
+                    >
+                        YOUR
+                        <span>WORK.</span>
+                    </h3>
+
+
+                    <div
+                        id="projects-list"
+                        style="
+                            display:grid;
+                            gap:24px;
+                        "
+                    >
+
+                        <div class="work-card">
+
+                            <p class="eyebrow">
+                                LOADING
+                            </p>
+
+                            <h3>
+                                Loading projects...
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ENQUIRIES
+        ========================== -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div
+                    style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:flex-end;
+                        gap:24px;
+                        flex-wrap:wrap;
+                        margin-bottom:48px;
+                    "
+                >
+
+                    <div>
+
+                        <p class="eyebrow">
+                            INCOMING PROJECTS
+                        </p>
+
+                        <h2>
+                            PROJECT
+                            <span>ENQUIRIES.</span>
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="refresh-enquiries-button"
+                        class="btn btn-secondary"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="admin-status"
+                    class="form-status"
+                    role="status"
+                ></div>
+
+
+                <div
+                    id="enquiries-list"
+                    style="
+                        display:grid;
+                        gap:24px;
+                    "
+                >
+
+                    <div class="work-card">
+
+                        <p class="eyebrow">
+                            LOADING
+                        </p>
+
+                        <h3>
+                            Loading enquiries...
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATEMENT
+        ========================== -->
+
+        <section class="statement">
+
+            <div class="container">
+
+                <p class="statement-text">
+                    Every good project
+                    starts with an idea.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CTA
+        ========================== -->
+
+        <section class="cta">
+
+            <div class="container">
+
+                <p class="eyebrow">
+                    ƁƦƠҠЄƝ
+                </p>
+
+                <h2>
+                    KEEP
+                    <span>BUILDING.</span>
+                </h2>
+
+                <a
+                    href="/"
+                    class="btn btn-primary"
+                >
+                    Back to Website
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-inner">
+
+                <p>
+                    © 2026 ƁƦƠҠЄƝ
+                </p>
+
+                <p>
+                    Digital Experiences
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        /*
+         * =====================================
+         * BASIC ELEMENTS
+         * =====================================
+         */
+
+        const projectForm =
+            document.getElementById(
+                "project-form"
+            );
+
+        const projectTitle =
+            document.getElementById(
+                "project-title"
+            );
+
+        const projectCategory =
+            document.getElementById(
+                "project-category"
+            );
+
+        const projectDescription =
+            document.getElementById(
+                "project-description"
+            );
+
+        const projectLink =
+            document.getElementById(
+                "project-link"
+            );
+
+        const addProjectButton =
+            document.getElementById(
+                "add-project-button"
+            );
+
+        const projectFormMessage =
+            document.getElementById(
+                "project-form-message"
+            );
+
+        const projectsList =
+            document.getElementById(
+                "projects-list"
+            );
+
+        const refreshProjectsButton =
+            document.getElementById(
+                "refresh-projects-button"
+            );
+
+        const enquiriesList =
+            document.getElementById(
+                "enquiries-list"
+            );
+
+        const refreshEnquiriesButton =
+            document.getElementById(
+                "refresh-enquiries-button"
+            );
+
+        const adminStatus =
+            document.getElementById(
+                "admin-status"
+            );
+
+        const logoutButton =
+            document.getElementById(
+                "logout-button"
+            );
+
+
+        /*
+         * =====================================
+         * SECURITY
+         * =====================================
+         */
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /*
+         * =====================================
+         * DATE
+         * =====================================
+         */
+
+        function formatDate(
+            value
+        ) {
+
+            if (!value) {
+
+                return "Date unavailable";
+
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return value;
+
+            }
+
+
+            return date.toLocaleString();
+
+        }
+
+
+        /*
+         * =====================================
+         * STATUS
+         * =====================================
+         */
+
+        function showAdminStatus(
+            text
+        ) {
+
+            adminStatus.textContent =
+                text;
+
+            adminStatus.style.display =
+                text
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        /*
+         * =====================================
+         * PROJECTS
+         * =====================================
+         */
+
+        async function loadProjects() {
+
+            refreshProjectsButton.disabled =
+                true;
+
+            refreshProjectsButton.textContent =
+                "Loading...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/admin/projects",
+                        {
+                            method: "GET",
+
+                            credentials:
+                                "same-origin"
+                        }
+                    );
+
+
+                if (
+                    response.status === 401
+                ) {
+
+                    window.location.href =
+                        "/admin-login";
+
+                    return;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.detail ||
+                        "Unable to load projects."
+                    );
+
+                }
+
+
+                renderProjects(
+                    data
+                );
+
+
+            } catch (error) {
+
+                projectsList.innerHTML = `
+
+                    <div class="work-card">
+
+                        <p class="eyebrow">
+                            ERROR
+                        </p>
+
+                        <h3>
+                            Unable to load projects.
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                error.message
+                            )}
+                        </p>
+
+                    </div>
+
+                `;
+
+            } finally {
+
+                refreshProjectsButton.disabled =
+                    false;
+
+                refreshProjectsButton.textContent =
+                    "Refresh";
+
+            }
+
+        }
+
+
+        function renderProjects(
+            projects
+        ) {
+
+            if (
+                !Array.isArray(
+                    projects
+                )
+                ||
+                projects.length === 0
+            ) {
+
+                projectsList.innerHTML = `
+
+                    <div class="work-card">
+
+                        <p class="eyebrow">
+                            EMPTY
+                        </p>
+
+                        <h3>
+                            No projects yet.
+                        </h3>
+
+                        <p>
+                            Add your first project
+                            using the form above.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            projectsList.innerHTML =
+                projects
+                    .slice()
+                    .reverse()
+                    .map(
+                        (project) => `
+
+                            <article
+                                class="work-card"
+                                style="
+                                    padding:32px;
+                                "
+                            >
+
+                                <div
+                                    style="
+                                        display:flex;
+                                        justify-content:space-between;
+                                        align-items:flex-start;
+                                        gap:24px;
+                                        flex-wrap:wrap;
+                                    "
+                                >
+
+                                    <div>
+
+                                        <p class="eyebrow">
+                                            ${escapeHTML(
+                                                project.category ||
+                                                "PROJECT"
+                                            )}
+                                        </p>
+
+                                        <h3>
+                                            ${escapeHTML(
+                                                project.title
+                                            )}
+                                        </h3>
+
+                                    </div>
+
+                                    <p
+                                        style="
+                                            font-size:12px;
+                                            opacity:.55;
+                                            letter-spacing:1px;
+                                        "
+                                    >
+                                        #${escapeHTML(
+                                            project.id
+                                        )}
+                                    </p>
+
+                                </div>
+
+
+                                <p
+                                    style="
+                                        margin:24px 0;
+                                    "
+                                >
+                                    ${escapeHTML(
+                                        project.description ||
+                                        "No description provided."
+                                    )}
+                                </p>
+
+
+                                <div
+                                    style="
+                                        display:flex;
+                                        gap:12px;
+                                        flex-wrap:wrap;
+                                    "
+                                >
+
+                                    ${
+                                        project.link
+                                        ?
+                                        `
+                                            <a
+                                                href="${escapeHTML(
+                                                    project.link
+                                                )}"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="btn btn-secondary"
+                                            >
+                                                Open Project
+                                            </a>
+                                        `
+                                        :
+                                        ""
+                                    }
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary delete-project-button"
+                                        data-project-id="${escapeHTML(
+                                            project.id
+                                        )}"
+                                    >
+                                        Delete Project
+                                    </button>
+
+                                </div>
+
+                            </article>
+
+                        `
+                    )
+                    .join("");
+
+
+            document
+                .querySelectorAll(
+                    ".delete-project-button"
+                )
+                .forEach(
+                    (button) => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                const projectId =
+                                    Number(
+                                        button.dataset
+                                            .projectId
+                                    );
+
+
+                                deleteProject(
+                                    projectId
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /*
+         * =====================================
+         * ADD PROJECT
+         * =====================================
+         */
+
+        projectForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                const title =
+                    projectTitle.value.trim();
+
+                const category =
+                    projectCategory.value.trim();
+
+                const description =
+                    projectDescription.value.trim();
+
+                const link =
+                    projectLink.value.trim();
+
+
+                if (!title) {
+
+                    projectFormMessage.textContent =
+                        "Project title is required.";
+
+                    projectFormMessage.style.display =
+                        "block";
+
+                    return;
+
+                }
+
+
+                addProjectButton.disabled =
+                    true;
+
+                addProjectButton.textContent =
+                    "Adding...";
+
+
+                projectFormMessage.textContent =
+                    "";
+
+                projectFormMessage.style.display =
+                    "none";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/api/admin/projects",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                credentials:
+                                    "same-origin",
+
+                                body:
+                                    JSON.stringify({
+                                        title:
+                                            title,
+
+                                        category:
+                                            category,
+
+                                        description:
+                                            description,
+
+                                        link:
+                                            link
+                                    })
+                            }
+                        );
+
+
+                    if (
+                        response.status === 401
+                    ) {
+
+                        window.location.href =
+                            "/admin-login";
+
+                        return;
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.detail ||
+                            "Unable to add project."
+                        );
+
+                    }
+
+
+                    projectFormMessage.textContent =
+                        "Project added successfully.";
+
+                    projectFormMessage.style.display =
+                        "block";
+
+
+                    projectForm.reset();
+
+
+                    await loadProjects();
+
+
+                } catch (error) {
+
+                    projectFormMessage.textContent =
+                        error.message ||
+                        "Unable to add project.";
+
+                    projectFormMessage.style.display =
+                        "block";
+
+                } finally {
+
+                    addProjectButton.disabled =
+                        false;
+
+                    addProjectButton.textContent =
+                        "Add Project";
+
+                }
+
+            }
+        );
+
+
+        /*
+         * =====================================
+         * DELETE PROJECT
+         * =====================================
+         */
+
+        async function deleteProject(
+            projectId
+        ) {
+
+            const confirmed =
+                window.confirm(
+                    "Delete this project permanently?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/admin/projects/${projectId}`,
+                        {
+                            method: "DELETE",
+
+                            credentials:
+                                "same-origin"
+                        }
+                    );
+
+
+                if (
+                    response.status === 401
+                ) {
+
+                    window.location.href =
+                        "/admin-login";
+
+                    return;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.detail ||
+                        "Unable to delete project."
+                    );
+
+                }
+
+
+                await loadProjects();
+
+
+            } catch (error) {
+
+                showAdminStatus(
+                    error.message ||
+                    "Unable to delete project."
+                );
+
+            }
+
+        }
+
+
+        /*
+         * =====================================
+         * ENQUIRIES
+         * =====================================
+         */
+
+        async function loadEnquiries() {
+
+            refreshEnquiriesButton.disabled =
+                true;
+
+            refreshEnquiriesButton.textContent =
+                "Loading...";
+
+
+            showAdminStatus("");
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/admin/enquiries",
+                        {
+                            method: "GET",
+
+                            credentials:
+                                "same-origin"
+                        }
+                    );
+
+
+                if (
+                    response.status === 401
+                ) {
+
+                    window.location.href =
+                        "/admin-login";
+
+                    return;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.detail ||
+                        "Unable to load enquiries."
+                    );
+
+                }
+
+
+                renderEnquiries(
+                    data
+                );
+
+
+            } catch (error) {
+
+                enquiriesList.innerHTML = `
+
+                    <div class="work-card">
+
+                        <p class="eyebrow">
+                            ERROR
+                        </p>
+
+                        <h3>
+                            Unable to load enquiries.
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                error.message
+                            )}
+                        </p>
+
+                    </div>
+
+                `;
+
+            } finally {
+
+                refreshEnquiriesButton.disabled =
+                    false;
+
+                refreshEnquiriesButton.textContent =
+                    "Refresh";
+
+            }
+
+        }
+
+
+        function renderEnquiries(
+            enquiries
+        ) {
+
+            if (
+                !Array.isArray(
+                    enquiries
+                )
+                ||
+                enquiries.length === 0
+            ) {
+
+                enquiriesList.innerHTML = `
+
+                    <div class="work-card">
+
+                        <p class="eyebrow">
+                            NO PROJECTS YET
+                        </p>
+
+                        <h3>
+                            Nothing has arrived.
+                        </h3>
+
+                        <p>
+                            New project enquiries
+                            submitted through the
+                            website will appear here.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            enquiriesList.innerHTML =
+                enquiries
+                    .slice()
+                    .reverse()
+                    .map(
+                        (enquiry) => `
+
+                            <article
+                                class="work-card"
+                                style="
+                                    padding:32px;
+                                "
+                            >
+
+                                <div
+                                    style="
+                                        display:flex;
+                                        justify-content:space-between;
+                                        gap:24px;
+                                        align-items:flex-start;
+                                        flex-wrap:wrap;
+                                        margin-bottom:24px;
+                                    "
+                                >
+
+                                    <div>
+
+                                        <p class="eyebrow">
+                                            PROJECT #${escapeHTML(
+                                                enquiry.id
+                                            )}
+                                        </p>
+
+                                        <h3>
+                                            ${escapeHTML(
+                                                enquiry.name
+                                            )}
+                                        </h3>
+
+                                    </div>
+
+                                    <p
+                                        style="
+                                            font-size:12px;
+                                            letter-spacing:1px;
+                                            opacity:.65;
+                                        "
+                                    >
+                                        ${escapeHTML(
+                                            formatDate(
+                                                enquiry.submitted_at
+                                            )
+                                        )}
+                                    </p>
+
+                                </div>
+
+
+                                <div
+                                    style="
+                                        display:grid;
+                                        gap:14px;
+                                        margin-bottom:28px;
+                                    "
+                                >
+
+                                    <p>
+                                        <strong>
+                                            Email
+                                        </strong><br>
+
+                                        <a
+                                            href="mailto:${escapeHTML(
+                                                enquiry.email
+                                            )}"
+                                        >
+                                            ${escapeHTML(
+                                                enquiry.email
+                                            )}
+                                        </a>
+                                    </p>
+
+
+                                    <p>
+                                        <strong>
+                                            Project
+                                        </strong><br>
+
+                                        ${escapeHTML(
+                                            enquiry.project ||
+                                            "Not specified"
+                                        )}
+                                    </p>
+
+
+                                    <p>
+                                        <strong>
+                                            Budget
+                                        </strong><br>
+
+                                        ${escapeHTML(
+                                            enquiry.budget ||
+                                            "Not specified"
+                                        )}
+                                    </p>
+
+
+                                    <p>
+                                        <strong>
+                                            Message
+                                        </strong><br>
+
+                                        ${escapeHTML(
+                                            enquiry.message
+                                        )}
+                                    </p>
+
+                                </div>
+
+
+                                <a
+                                    class="btn btn-secondary"
+                                    href="mailto:${escapeHTML(
+                                        enquiry.email
+                                    )}"
+                                >
+                                    Reply by Email
+                                </a>
+
+                            </article>
+
+                        `
+                    )
+                    .join("");
+
+        }
+
+
+        /*
+         * =====================================
+         * LOGOUT
+         * =====================================
+         */
+
+        logoutButton.addEventListener(
+            "click",
+            async () => {
+
+                logoutButton.disabled =
+                    true;
+
+                logoutButton.textContent =
+                    "Logging out...";
+
+
+                try {
+
+                    await fetch(
+                        "/api/admin/logout",
+                        {
+                            method: "POST",
+
+                            credentials:
+                                "same-origin"
+                        }
+                    );
+
+                } finally {
+
+                    window.location.href =
+                        "/admin-login";
+
+                }
+
+            }
+        );
+
+
+        /*
+         * =====================================
+         * BUTTONS
+         * =====================================
+         */
+
+        refreshProjectsButton.addEventListener(
+            "click",
+            loadProjects
+        );
+
+
+        refreshEnquiriesButton.addEventListener(
+            "click",
+            loadEnquiries
+        );
+
+
+        /*
+         * =====================================
+         * INITIAL LOAD
+         * =====================================
+         */
+
+        loadProjects();
+
+        loadEnquiries();
+
+    </script>
+
+</body>
+</html>

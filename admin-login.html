@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ƁƦƠҠЄƝ — Private Access</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+</head>
+
+<body>
+
+    <main class="admin-login-page">
+
+        <div class="admin-login-card">
+
+            <p class="eyebrow">
+                PRIVATE AREA
+            </p>
+
+            <h1>
+                ƁƦƠҠЄƝ
+                <span>ACCESS.</span>
+            </h1>
+
+            <p class="admin-login-text">
+                Private administration.
+                Enter your password to continue.
+            </p>
+
+            <form
+                id="admin-login-form"
+                class="admin-login-form"
+            >
+
+                <label for="admin-password">
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="admin-password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="admin-login-button"
+                >
+                    Enter Admin
+                </button>
+
+                <p
+                    id="admin-login-message"
+                    class="form-status"
+                    role="alert"
+                ></p>
+
+            </form>
+
+            <a
+                href="/"
+                class="admin-back-link"
+            >
+                ← Back to website
+            </a>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const form =
+            document.getElementById(
+                "admin-login-form"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "admin-password"
+            );
+
+        const button =
+            document.getElementById(
+                "admin-login-button"
+            );
+
+        const message =
+            document.getElementById(
+                "admin-login-message"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!password) {
+
+                    message.textContent =
+                        "Enter your password.";
+
+                    message.style.display =
+                        "block";
+
+                    return;
+                }
+
+
+                button.disabled = true;
+
+                button.textContent =
+                    "Checking...";
+
+
+                message.textContent = "";
+
+                message.style.display =
+                    "none";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/api/admin/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                credentials: "same-origin",
+
+                                body: JSON.stringify({
+                                    password:
+                                        password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.detail ||
+                            "Incorrect password."
+                        );
+                    }
+
+
+                    message.textContent =
+                        "Access granted.";
+
+                    message.style.display =
+                        "block";
+
+
+                    window.location.href =
+                        "/admin";
+
+
+                } catch (error) {
+
+                    message.textContent =
+                        error.message ||
+                        "Unable to sign in.";
+
+                    message.style.display =
+                        "block";
+
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "Enter Admin";
+
+                    passwordInput.focus();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
